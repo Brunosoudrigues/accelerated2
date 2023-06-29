@@ -19,11 +19,7 @@
 echo $this -> section("content");
     ?>
 
-<?php
-echo $this->section("products")
 
-
-?>
 </main>
 
   <!-- header -->
@@ -207,9 +203,21 @@ echo $this->section("products")
     <!-- container produtos -->
     <section class="container produtos">
       <!-- title -->
-      <h1 class="text-center">Mais Populares</h1>
+      <h1 class="text-center">Nossos produtos</h1>
 
-     
+      <?php
+                        foreach ($category as $categories) {
+                        ?>
+                        <li><a href="<?= url("Products/{$categories->name}"); ?>"><?= $categories->name; ?></a></li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+
+
+
+                        
+
 
 
    

@@ -22,7 +22,7 @@ $route->get("/alteracao","Web:alteration");
 $route->get("/carrinho","Web:cart");
 $route->get("/ops/{errcode}", "Web:error");
 $route->get("/produtos","Web:products");
-$route->get("/produtos/{nameCategory}","Web:products");
+$route->get("/produtos/{categoryName}","Web:products");
 
 $route->group("/app");
 $route->get("/", "App:home");

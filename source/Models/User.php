@@ -3,21 +3,26 @@
 namespace Source\Models;
 
 use Source\Core\Connect;
-use Source\Models\Financial\Savings;
+use PDO;
+use PDOException;
 
 class User {
     private $name;
     private $email;
     private $password;
-    private $address; // atributo novo do tipo Address
-    private $savings; // não entra na construtora
+    private $address; // Atributo novo
+    private $message;
 
-    public function __construct ($name = null,$email = null,
-                                 $password = null, Address $address = null){
+    public function __construct (
+        $name = null,
+        $email = null,
+        $password = null,
+        Address $address = null // Parametro novo
+    ){
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        $this->address = $address;
+        $this->address = $address; // Atribuição nova
     }
 
     public function getName()
@@ -50,9 +55,48 @@ class User {
         $this->password = $password;
     }
 
-    public function addSavings (Savings $savings){
-        $this->savings[] = $savings;
-        //var_dump($this->savings);
+    public function getMessage(): string
+    {
+        return $this->message;
     }
 
-}
+    public function insert () : bool
+    {
+        $query = "INSERT INTO users VALUES (NULL,:name,:email,:password)";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":password",$this->password);
+        try {
+            $stmt->execute();
+            if($stmt->rowCount()){
+                $this->message = "Usuário inserido com sucesso!";
+                return true;
+            }
+            $this->message = "Erro ao inserir usuário, verifique os dados!";
+            return false;
+        } catch (PDOException $e) {
+            $this->message = "Erro: {$e->getMessage()}";
+            return false;
+        }
+    }
+
+
+    public function auth (string $email, string $password) : bool
+    {
+        $query = "SELECT * 
+                  FROM users 
+                  WHERE email LIKE :email AND password LIKE :password";
+
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":password", $password);
+        $stmt->execute();
+        if($stmt->rowCount() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+
+}   

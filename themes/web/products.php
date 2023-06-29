@@ -1,7 +1,5 @@
-
-
 <?php
-$this->layout("_theme");
+    $this->layout("_theme",["categories" => $categories]);
 
 ?>
 
@@ -12,7 +10,7 @@ $this->layout("_theme");
 
    
         <!-- container produtos -->
-        <section class="container produtos"> <!-- produtos -->
+ <section class="container produtos"> <!-- produtos -->
         
 
         
@@ -24,10 +22,13 @@ foreach($products as $product){
 
  <a href="#" class="produtos-container col-md-3">
           <!-- imagem do produto -->
-          <img src="./assets/web/images/volante pulse.jpg" class="img-fluid" alt="Volante gm">
+          <img src="./assets/web/images/volante pulse.jpg" class="img-fluid" alt="">
 
           <!-- itens do produto -->
           <article class="produtos-itens">
+
+          <h2><?= $product->nameproducts; ?></h2>
+          <h2><?= $product->price; ?></h2>
             <!-- title produto -->
             <h2><?= $product->name; ?></h2>
   

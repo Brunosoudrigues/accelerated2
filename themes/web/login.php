@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-br">
 
 <head>
@@ -48,34 +48,34 @@ echo $this -> section("login");
 </form>
 </body>
 
-<!-- </html>
+ </html>
 <script async>
-                    const form = document.querySelector("#loginUsers");
-                    const message = document.querySelector("#message");
-                    form.addEventListener("submit", async (e) => {
-                        e.preventDefault();
-                        const dataUser = new FormData(form);
-                        const data = await fetch("http://localhost/loja/api/user-login.php",{
-                            method: "POST",
-                            body: dataUser,
-                        });
-                        const user = await data.json();
-                        console.log(user);
-                        message.textContent = user.message;
+                    // const form = document.querySelector("#loginUsers");
+                    // const message = document.querySelector("#message");
+                    // form.addEventListener("submit", async (e) => {
+                    //     e.preventDefault();
+                    //     const dataUser = new FormData(form);
+                    //     const data = await fetch("http://localhost/loja/api/user-login.php",{
+                    //         method: "POST",
+                    //         body: dataUser,
+                    //     });
+                    //     const user = await data.json();
+                    //     console.log(user);
+                    //     message.textContent = user.message;
                        
-                        message.setAttribute("style","display")
-                        if(user.type === "error"){
-                            // trocar o status da message
-                            message.textContent = user.message;
-                        } else {
-                            // trocar o status da message
-                            message.textContent = `Olá, ${user.name}!`;
-                        }
-                        setTimeout(() => {
-                            message.setAttribute("style","display: none")
-                        }, 3000);
+                    //     message.setAttribute("style","display")
+                    //     if(user.type === "error"){
+                    //         // trocar o status da message
+                    //         message.textContent = user.message;
+                    //     } else {
+                    //         // trocar o status da message
+                    //         message.textContent = `Olá, ${user.name}!`;
+                    //     }
+                    //     setTimeout(() => {
+                    //         message.setAttribute("style","display: none")
+                    //     }, 3000);
         
-                    });
+                    // });
 
 
-</script> -->
+</script>

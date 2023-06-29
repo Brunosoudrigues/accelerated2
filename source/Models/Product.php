@@ -15,8 +15,11 @@ class Product
         return $stmt->fetchAll();
     }
 
-    public function selectByCategory(string $nameCategory){
-        $query = "SELECT products.* FROM products  join categories ON products.id = products.category_id where products.name LIKE '{$nameCategory}'";
+    public function selectByCategory(string $categoryName){
+        $query = "SELECT products.* 
+        FROM products  
+        join categories ON products.category_id = categories.id 
+        where categories.name LIKE '{$categoryName}'";
         $stmt = Connect::getInstance()->query($query);
         return $stmt->fetchAll();
 

@@ -17,10 +17,10 @@ class Web
     }
 
 
-    public function login()
+    public function login(array $data) : void
     {
        
-        echo $this ->view -> render ("login");
+        echo $this ->view -> render ("user-auth",[]);
     }
 
     public function alteration()
@@ -48,19 +48,20 @@ class Web
 
         public function products (array $data) : void {
 
+            //var_dump($data);
 
+            $products = new Product();
 
-//var_dump($data["categoryName"]);
+                //var_dump($products->selectByCategory($data["categoryName"]));            
 
-            $products = New Product();
-
-            if(!empty($data["nameCategory"])){
-                echo $this->view->render("products", ["products" => $products->selectByCategory($data["nameCategory"])]);
-return;
-
+            if(!empty($data["categoryName"])){
+                echo $this->view->render("products", ["products" => $products->selectByCategory($data["categoryName"])]);
+                return;
             }
             //var_dump($products->selectAll());
-            var_dump($data["nameCategory"]);
-           echo $this->view->render("products", ["products" => $products->selectAll()]);
+            //var_dump($data["categoryName"]);
+            echo $this->view->render("products", ["products" => $products->selectAll() ]);
+
         }
+
     }

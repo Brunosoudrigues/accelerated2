@@ -52,7 +52,7 @@ echo $this -> section("content");
         <!-- administrativo do cliente -->
         <ul class="col-md-3 nav d-flex align-items-center justify-content-around">
           <li class="nav-item">
-            <a href="<?= url("/login")?>">
+            <a href="<?= url("register")?>">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -205,13 +205,13 @@ echo $this -> section("content");
       <!-- title -->
       <h1 class="text-center">Nossos produtos</h1>
 
-      <?php
+       <!-- <?php
                         foreach ($category as $categories) {
                         ?>
                         <li><a href="<?= url("Products/{$categories->name}"); ?>"><?= $categories->name; ?></a></li>
                         <?php
-                        }
-                        ?>
+                        }    
+                        ?> 
                     </ul>
 
 
@@ -327,5 +327,4 @@ echo $this -> section("content");
   <script src="./assets/js/popper.js"></script>
   <script src="./assets/js/bootstrap.js"></script>
 </body>
-
 </html>

@@ -69,7 +69,7 @@
             <button>Fazer login</button>
         </div>
         <div class="response">
-
+        <a href="<?= url("/_theme")?>"> voltar</a>
         </div>
     </form>
 

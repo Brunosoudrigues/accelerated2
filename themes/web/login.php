@@ -41,7 +41,7 @@ echo $this -> section("login");
                 <div id="message">
 
                 </div>
-                <a class="back" href="<?= url("/")?>">Voltar</a>
+            
             </div>
         </div>
     </div>

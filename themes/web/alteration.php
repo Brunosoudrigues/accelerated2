@@ -137,6 +137,11 @@ function atualizarCadastroNoBanco($name, $email, $password) {
                     </div>
                     <div class="text-center">
                         <button type="submit">Enviar</button>
+
+                        <div class="response">
+        <a href="<?= url("/")?>"> voltar</a></br>
+        <a href="<?= url("/cadastro")?>"> Cadastre-se</a></br>
+        <a href="<?= url("/alteracao")?>"> Faça seu login!</a>
                     </div>
                 </form>
             </div>

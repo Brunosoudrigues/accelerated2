@@ -52,7 +52,7 @@ echo $this -> section("content");
         <!-- administrativo do cliente -->
         <ul class="col-md-3 nav d-flex align-items-center justify-content-around">
           <li class="nav-item">
-            <a href="<?= url("register")?>">
+            <a href="<?= url("/cadastro")?>">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -101,26 +101,22 @@ echo $this -> section("content");
 
           <!-- submenu -->
           <ul class="nav flex-column">
-            <li class="nav-item">
-              <a href="#">
-                Lançamentos
-              </a>
-            </li>
+           
 
             <li class="nav-item">
-              <a href="#">
+            <a href="<?= url("/produtos/pneu")?>">
                 Pneus
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="#">
+            <a href="<?= url("/produtos/volante")?>">
                 Volantes 
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="#">
+            <a href="<?= url("/produtos/aromatizador")?>">
                 Acessórios
               </a>
             </li>

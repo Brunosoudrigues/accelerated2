@@ -137,7 +137,12 @@ function cadastrarUsuarioNoBanco($name, $email, $password) {
                     </div>
                     <div class="text-center">
                         <button type="submit">Enviar</button>
+
                     </div>
+                    <div class="response">
+        <a href="<?= url("/")?>"> voltar</a></br>
+        <a href="<?= url("/login")?>"> Faça seu login!</a></br>
+        <a href="<?= url("/alteracao")?>"> deseja alterar seus dados? clique aqui!</a>
                 </form>
             </div>
         </div>

@@ -1,3 +1,38 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+
+  // Verifica se o email e a senha estão no banco de dados
+  $userExists = verificarUsuarioNoBanco($email, $password);
+
+  if ($userExists) {
+    echo json_encode(["success" => true]);
+  } else {
+    echo json_encode(["success" => false]);
+  }
+}
+
+// Função de exemplo para verificar o usuário no banco de dados
+function verificarUsuarioNoBanco($email, $password) {
+  // Lógica para verificar o usuário no banco de dados
+  // Retorne true se o usuário existir, caso contrário, retorne false
+  // Aqui você deve adicionar a lógica real para verificar o usuário no banco de dados
+
+  // Exemplo de lógica de verificação simples
+  $storedEmail = "usuario@example.com";
+  $storedPassword = "senha123";
+
+  if ($email === $storedEmail && $password === $storedPassword) {
+    return true;
+  } else {
+    return false;
+  }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -69,7 +104,9 @@
             <button>Fazer login</button>
         </div>
         <div class="response">
-        <a href="<?= url("/_theme")?>"> voltar</a>
+        <a href="<?= url("/")?>"> voltar</a></br>
+        <a href="<?= url("/cadastro")?>"> Cadastre-se</a></br>
+        <a href="<?= url("/alteracao")?>"> deseja alterar seus dados? clique aqui!</a>
         </div>
     </form>
 

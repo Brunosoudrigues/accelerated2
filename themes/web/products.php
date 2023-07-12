@@ -38,7 +38,7 @@
 </style>
 
 <?php
-    $this->layout("_theme", ["categories" => $categories]);
+    $this->layout("_theme");
 ?>
 
 <!-- listagem dos produtos -->

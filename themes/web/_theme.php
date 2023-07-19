@@ -28,7 +28,7 @@
 
         <!-- logo -->
         <a href="./" class="col-md-2 d-flex justify-content-center">
-          <img src="./assets/web/images/logoautopeças-removebg-preview.png" class="img-fluid" alt="">
+          <img src="<?= url("./assets/web/images/logoautopeças-removebg-preview.png")?>" class="img-fluid" alt="">
         </a>
 
         <!-- buscador -->

@@ -27,15 +27,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function consultarEmailNoBanco($email) {
   // Lógica para consultar o email no banco de dados
   // Retorne true se o email existir, caso contrário, retorne false
-  return false;
+  
+  // Aqui você pode implementar a lógica para verificar o email no banco de dados
+  // Vamos considerar que o email "fabiosantos@ifsul.edu.br" já está cadastrado
+  if ($email === "fabiosantos@ifsul.edu.br") {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // Função de exemplo para cadastrar o usuário no banco de dados
 function cadastrarUsuarioNoBanco($name, $email, $password) {
   // Lógica para cadastrar o usuário no banco de dados
-  // ...
+  // Aqui você pode implementar a lógica para cadastrar o usuário
+  // no banco de dados
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -125,15 +134,17 @@ function cadastrarUsuarioNoBanco($name, $email, $password) {
                         <input type="text" class="form-control" name="name" id="subject" placeholder="Seu nome" value="">
                     </div>
                     <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="email" id="subject" placeholder="Seu email" value="">
+                        <input type="text" id="email" class="form-control" name="email" id="subject" placeholder="Seu email" value="">
                     </div>
                     <div class="form-group mt-3">
-                        <input type="text" class="form-control" name="password" id="subject" placeholder="Sua senha" value="">
+                        <input type="text" class="form-control" type="password" name="password" id="subject" placeholder="Sua senha" value="" >
+                
                     </div>
                     <div class="my-3">
                         <div class="loading">Loading</div>
                         <div class="error-message"></div>
                         <div class="sent-message"></div>
+                        <div id="message">
                     </div>
                     <div class="text-center">
                         <button type="submit">Enviar</button>
@@ -150,49 +161,59 @@ function cadastrarUsuarioNoBanco($name, $email, $password) {
 </section>
 
 <script type="text/javascript" async>
-    const form = document.querySelector(".php-email-form");
+   
+   const form = document.querySelector(".php-email-form");
+const email = document.querySelector("#email");
+const headers = {
+  email: "fabiosantos@ifsul.edu.br",
+  password: "12345678"
+};
 
-    const headers = {
-        email: "fabiosantos@ifsul.edu.br",
-        password: "12345678"
-    };
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+  const nameInput = document.querySelector('input[name="name"]');
+  const emailInput = document.querySelector('input[name="email"]');
+  const passwordInput = document.querySelector('input[name="password"]');
 
-        const nameInput = document.querySelector('input[name="name"]');
-        const emailInput = document.querySelector('input[name="email"]');
-        const passwordInput = document.querySelector('input[name="password"]');
+  const name = nameInput.value;
+  const email = emailInput.value;
+  const password = passwordInput.value;
 
-        const name = nameInput.value;
-        const email = emailInput.value;
-        const password = passwordInput.value;
+  // Verifica se o email já foi preenchido anteriormente
+  if (email === headers.email) {
+    document.querySelector("#message").innerHTML = "Email já cadastrado!";
+    return;
+  }
 
-        if (name === "" || email === "" || password === "") {
-            const errorMessageDiv = document.querySelector(".sent-message");
-            errorMessageDiv.textContent = "Por favor, preencha todos os campos.";
-            errorMessageDiv.style.display = "block";
-        } else {
-            const data = await fetch(`<?= url("api/user");?>`, {
-                method: "POST",
-                body: new FormData(form),
-                headers: headers
-            });
-            const user = await data.json();
-            console.log(user);
+  // Verifica se todos os campos estão preenchidos
+  if (name === "" || email === "" || password === "") {
+    const errorMessageDiv = document.querySelector(".sent-message");
+    errorMessageDiv.textContent = "Por favor, preencha todos os campos.";
+    errorMessageDiv.style.display = "block";
+    return;
+  }
 
-            if (user.success) {
-                const sentMessageDiv = document.querySelector(".sent-message");
-                sentMessageDiv.textContent = "Usuário cadastrado com sucesso!";
-                sentMessageDiv.style.display = "block";
-                form.reset();
-            } else {
-                const errorMessageDiv = document.querySelector(".sent-message");
-                errorMessageDiv.textContent = "Ocorreu um erro ao cadastrar o usuário.";
-                errorMessageDiv.style.display = "block";
-            }
-        }
-    });
+  const data = await fetch(`<?= url("api/user");?>`, {
+    method: "POST",
+    body: new FormData(form),
+    headers: headers
+  });
+  const user = await data.json();
+  console.log(user);
+
+  if (user.success) {
+    const sentMessageDiv = document.querySelector(".sent-message");
+    sentMessageDiv.textContent = "Usuário cadastrado com sucesso!";
+    sentMessageDiv.style.display = "block";
+    form.reset();
+  } else {
+    const errorMessageDiv = document.querySelector(".sent-message");
+    errorMessageDiv.textContent = "Ocorreu um erro ao cadastrar o usuário.";
+    errorMessageDiv.style.display = "block";
+  }
+});
+
 </script>
 </body>
 </html>

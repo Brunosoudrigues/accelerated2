@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +9,12 @@
   <meta name="msapplication-TileColor" content="#FFC107">
   <meta name="msapplication-TileImage" content="./assets/images/favicons/ms-icon-144x144.png">
   <meta name="theme-color" content="#FFC107">
-  <link rel="stylesheet" href="<?=("./assets/web/css/style.css")?>">
+  <link rel="stylesheet" href="/accelerated/assets/web/css/style.css">
 </head>     
 
 <body>
   <main id ="main">
-    <?php
-echo $this -> section("content");
-    ?>
+
 
 
 </main>
@@ -31,7 +28,7 @@ echo $this -> section("content");
 
         <!-- logo -->
         <a href="./" class="col-md-2 d-flex justify-content-center">
-          <img src="./assets/web/images/logoautopeças-removebg-preview.png" class="img-fluid" alt="Logo da empresa - Moda da Mulher">
+          <img src="./assets/web/images/logoautopeças-removebg-preview.png" class="img-fluid" alt="">
         </a>
 
         <!-- buscador -->
@@ -101,7 +98,11 @@ echo $this -> section("content");
 
           <!-- submenu -->
           <ul class="nav flex-column">
-           
+          <li class="nav-item">
+            <a href="<?= url("/produtos")?>">
+                Lista completa
+              </a>
+            </li>
 
             <li class="nav-item">
             <a href="<?= url("/produtos/pneu")?>">
@@ -122,7 +123,7 @@ echo $this -> section("content");
             </li>
 
             <li class="nav-item">
-              <a href="#">
+              <a href="<?= url("/")?>">
                 Promoção
               </a>
             </li>
@@ -199,15 +200,29 @@ echo $this -> section("content");
     <!-- container produtos -->
     <section class="container produtos">
       <!-- title -->
-      <h1 class="text-center">Nossos produtos</h1>
+  
 
-       <!-- <?php
-                        foreach ($category as $categories) {
-                        ?>
-                        <li><a href="<?= url("Products/{$categories->name}"); ?>"><?= $categories->name; ?></a></li>
-                        <?php
-                        }    
-                        ?> 
+      <?php
+echo $this -> section("content");
+    ?>
+
+<?php 
+        if (isset($category)) {
+            foreach ($category as $categories) {
+        ?>
+        <a href="<?= url("Products/{$categories->name}"); ?>" class="produtos-container col-md-3">
+            <!-- imagem do produto -->
+            <img src="<?= $categories->image; ?>" class="img-fluid produto-imagem" alt="">
+            <!-- itens do produto -->
+            <article class="produtos-itens">
+                <h2><?= $categories->name; ?></h2>
+            </article>
+            <!-- end itens do produto -->
+        </a>
+        <?php
+            }
+        }
+        ?>
                     </ul>
 
 
@@ -218,7 +233,6 @@ echo $this -> section("content");
 
    
 
-  <!-- Footer -->
   <footer class="container-fluid">
     <!-- container -->
     <section class="container">

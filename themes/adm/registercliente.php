@@ -1,40 +1,5 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = $_POST["name"];
-  $email = $_POST["email"];
-  $password = $_POST["password"];
-
-  if (empty($name) || empty($email) || empty($password)) {
-    echo "Por favor, preencha todos os campos.";
-  } else {
-
-    $existingEmail = consultarEmailNoBanco($email);
-
-    if ($existingEmail) {
-      echo "O email informado já está cadastrado.";
-    } else {
-
-      cadastrarUsuarioNoBanco($name, $email, $password);
-
-      // Exibe mensagem de sucesso
-      echo "Usuário cadastrado com sucesso!";
-    }
-  }
-}
-
-function consultarEmailNoBanco($email) {
-
-  if ($email === "fabiosantos@ifsul.edu.br") {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-
-function cadastrarUsuarioNoBanco($name, $email, $password) {
-
-}
+$this->layout("_theme");
 ?>
 
 
@@ -117,9 +82,11 @@ function cadastrarUsuarioNoBanco($name, $email, $password) {
 <!-- Omissão do restante do código HTML -->
 </head>
 <body>
+    <title>Cadastro manual cliente</title>
 <section id="contact" class="contact section-bg">
     <div class="container" data-aos="fade-up">
         <div class="row">
+            <h2>Cadastro manual cliente</h2>
             <div class="col-lg-6">
                 <form role="form" class="php-email-form" method="POST">
                     <div class="form-group mt-3">
@@ -143,9 +110,8 @@ function cadastrarUsuarioNoBanco($name, $email, $password) {
 
                     </div>
                     <div class="response">
-        <a href="<?= url("/")?>"> voltar</a></br>
-        <a href="<?= url("/login")?>"> Faça seu login!</a></br>
-        <a href="<?= url("/alteracao")?>"> deseja alterar seus dados? clique aqui!</a>
+        <a href="<?= url("/admin")?>"> voltar</a></br>
+
                 </form>
             </div>
         </div>

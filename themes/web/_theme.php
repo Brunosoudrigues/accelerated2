@@ -205,7 +205,7 @@
       <?php
 echo $this -> section("content");
     ?>
-
+ 
 <?php 
         if (isset($category)) {
             foreach ($category as $categories) {
@@ -280,6 +280,10 @@ echo $this -> section("content");
             <li class="nav-item">
               <a href="#">Troca e devoluções</a>
             </li>
+            <li class="nav-item">
+              <a href="<?= url("/faq")?>">Faq</a>
+            </li>
+
           </ul>
         </article>
         <!-- end acesso rápido -->

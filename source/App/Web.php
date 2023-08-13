@@ -38,6 +38,12 @@ class Web
        
         echo $this ->view -> render ("cart");
     }
+    public function productsinsert()
+    {
+       
+        echo $this ->view -> render ("productsinsert");
+    }
+
     public function faq()
     {
         $faqs = new Faq();

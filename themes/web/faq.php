@@ -1,32 +1,48 @@
 <?php
-   
-?>
 
+require_once 'Connect.php';
 
-<!DOCTYPE html>
+class Faq
+{
+    // ... restante do código igual ao exemplo anterior ...
 
-<html lang="pt-br">
+    public function insert()
+    {
+        $connection = Connect::getInstance();
 
-<head>
-    <meta charset="UTF-8">
-    <title>Alteração de Dados</title>
-    <link rel="stylesheet" href="<?=("./assets/web/css/stylelore.css")?>">
-    <script type="text/javascript" src="assets/cadastro.js" async></script>
+        $query = "INSERT INTO faqs (question, answer) VALUES (:question, :answer)";
+        $stmt = $connection->prepare($query);
+        $stmt->bindValue(':question', $this->question);
+        $stmt->bindValue(':answer', $this->answer);
 
-</head>
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 
-<div class="text">
-                    <label for="question">Fale a sua duvida</label>
-                    <input name="password" type="text" id="question" placeholder="escreva aqui">
-                </div>
-                <button class="btn-insert">Enviar</button>
-<?php
-   if(!empty($faqs)){
-       //var_dump($faqs);
-       foreach ($faqs as $faq){
-           //var_dump($faq);
-           echo "<div>{$faq->question} - {$faq->answer}</div>";
-       }
-   }
-?>
-</html>
+    // Restante do código igual ao exemplo anterior ...
+
+    public function redirectToIndex()
+    {
+        echo '<script>window.location.href = "index.php";</script>';
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (!empty($_POST["question"])) {
+        $question = $_POST["question"];
+
+        // Criação de uma instância da classe Faq
+        $faq = new Faq($question);
+
+        // Chamada do método insert da classe Faq para inserir a pergunta no banco de dados
+        $faq->insert();
+
+        // Redirecionar para evitar o reenvio do formulário ao atualizar a página
+        $faq->redirectToIndex();
+        exit;
+    }
+}

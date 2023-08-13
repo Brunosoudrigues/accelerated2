@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = $_POST["email"];
   $password = $_POST["password"];
 
-  // Verifica se o email e a senha estão no banco de dados
+  
   $userExists = verificarUsuarioNoBanco($email, $password);
 
   if ($userExists) {
@@ -13,15 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-// Função de exemplo para verificar o usuário no banco de dados
 function verificarUsuarioNoBanco($email, $password) {
-  // Lógica para verificar o usuário no banco de dados
-  // Retorne true se o usuário existir, caso contrário, retorne false
-  // Aqui você deve adicionar a lógica real para verificar o usuário no banco de dados
-
-  // Exemplo de lógica de verificação simples
-  $storedEmail = "usuario@example.com";
-  $storedPassword = "senha123";
+  
 
   if ($email === $storedEmail && $password === $storedPassword) {
     return true;

@@ -24,4 +24,8 @@ class Product
         return $stmt->fetchAll();
 
     }
+   
+    
+
+
 }

@@ -107,7 +107,15 @@ class User {
             return false;
         }
         $user = $stmt->fetch();
-        
+        if (!password_verify($password, $user->password)){
+            $this->message="Senha incorreta!";
+            return false;
+
+        }
+        $this->id = $user->id;
+        $this->name= $user->name;
+        $this->message= "Usuario autenticado com sucesso!";
+        return true;
 
         
 

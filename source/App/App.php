@@ -38,5 +38,10 @@ class App
         echo "";
         echo $this ->view -> render ("profile");
     }
+    public function alterationcliente()
+    {
+        echo "";
+        echo $this ->view -> render ("alterationcliente");
+    }
 
 }

@@ -32,6 +32,7 @@ $route->get("/upload", "App:upload");
 $route->get("/alteracao", "App:alteration");
 $route->get("/carrinho","App:cart");
 $route->get("/perfil","App:profile");
+$route->get("/alteracaoperfil","App:alterationcliente");
 
 $route->group(null);
 

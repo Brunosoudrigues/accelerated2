@@ -61,7 +61,7 @@ $this->layout("_theme");
   <div class="content">
     <section>
       <h2>Dados de Fundação</h2>
-      <p>Nossa loja de carros foi fundada em 2005 com o objetivo de oferecer aos nossos clientes as melhores opções de peças e um atendimento excepcional.</p>
+      <p>Nossa loja de carros foi fundada em 2019 com o objetivo de oferecer aos nossos clientes as melhores opções de peças e um atendimento excepcional.</p>
     </section>
     <section>
       <h2>Sobre Nós</h2>

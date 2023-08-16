@@ -85,19 +85,32 @@ class User {
 
     public function auth (string $email, string $password) : bool
     {
-        $query = "SELECT * 
-                  FROM users 
-                  WHERE email LIKE :email AND password LIKE :password";
+        // $query = "SELECT * 
+        //           FROM users 
+        //           WHERE email LIKE :email AND password LIKE :password";
 
-        $stmt = Connect::getInstance()->prepare($query);
-        $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":password", $password);
+        // $stmt = Connect::getInstance()->prepare($query);
+        // $stmt->bindParam(":email", $email);
+        // $stmt->bindParam(":password", $password);
+        // $stmt->execute();
+        // if($stmt->rowCount() == 0) {
+        //     return false;
+        // }
+        // return true;
+
+        $query ="SELECT * FROM users WHERE email LIKE :email";
+        $stmt=Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":email",$email);
         $stmt->execute();
-        if($stmt->rowCount() == 0) {
+        if ($stmt->rowCount()==0){
+            $this->message= "Usuário não cadastrado!";
             return false;
         }
-        return true;
+        $user = $stmt->fetch();
         
+
+        
+
     }
 
 

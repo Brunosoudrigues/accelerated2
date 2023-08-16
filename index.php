@@ -23,6 +23,7 @@ $route->get("/carrinho","Web:cart");
 $route->get("/ops/{errcode}", "Web:error");
 $route->get("/produtos","Web:products");
 $route->get("/cadastroprodutos","Web:productsinsert");
+
 $route->get("/produtos/{categoryName}","Web:products");
 
 $route->group("/app");
@@ -30,6 +31,7 @@ $route->get("/", "App:home");
 $route->get("/upload", "App:upload");
 $route->get("/alteracao", "App:alteration");
 $route->get("/carrinho","App:cart");
+$route->get("/perfil","App:profile");
 
 $route->group(null);
 

@@ -1,7 +1,5 @@
 
-<?php
-echo $this->section("content");
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,6 +111,8 @@ Entrar
               </a><br>
     </div>
 
+    <?php echo $this->section("content"); ?>
+
     <script>
         function showTab(tabId) {
             const contents = document.querySelectorAll('.content');
@@ -124,6 +124,7 @@ Entrar
             selectedContent.style.display = 'block';
         }
     </script>
+
 
 </body>
 </html>

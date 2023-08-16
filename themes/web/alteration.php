@@ -36,7 +36,10 @@ function atualizarCadastroNoBanco($name, $email, $password) {
   // ...
 }
 ?>
+<?php
+$this->layout("_theme");
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -33,5 +33,10 @@ class App
         echo "";
         echo $this ->view -> render ("cart");
     }
+    public function profile()
+    {
+        echo "";
+        echo $this ->view -> render ("profile");
+    }
 
 }

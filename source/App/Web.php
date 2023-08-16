@@ -28,6 +28,7 @@ class Web
        
         echo $this ->view -> render ("alteration");
     }
+  
  public function register()
     {
        

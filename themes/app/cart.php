@@ -1,193 +1,265 @@
+<?php
+$this->layout("_theme");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carrinho de Compras</title>
-<style>
-  /* Reset de estilos para garantir consistência em diferentes navegadores */
-  body, h1, h2, h3, p, ul, li, table, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .product {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+        }
+        
+        .product img {
+            max-width: 100px;
+            margin-right: 10px;
+        }
+        
+        .product-details {
+            flex-grow: 1;
+        }
+        
+        .product-title {
+            font-weight: bold;
+        }
+        
+        .product-price {
+            color: #666;
+        }
 
-  /* Estilo para o cabeçalho */
-  header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-  }
-
-  /* Estilo para o título do carrinho */
-  .page-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-
-  /* Estilo para a seção principal */
-  .main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 20px;
-  }
-
-  /* Estilo para a tabela de produtos no carrinho */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-  }
-
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-  th {
-    background-color: #f4f4f4;
-  }
-
-  /* Estilo para os botões de quantidade */
-  .qty {
-    display: flex;
-    align-items: center;
-  }
-
-  .qty button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
-  /* Estilo para o botão de remover produto */
-  .remove button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #ff4a4a;
-  }
-
-  /* Estilo para a seção de resumo da compra */
-  .box {
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
-
-  .box header {
-    font-weight: bold;
-  }
-
-  .box .info {
-    margin-top: 10px;
-  }
-
-  .box .info div {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-  }
-
-  .box button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  /* Estilo para o botão de finalizar compra */
-  aside button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-  }
-</style>
-<link
-  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-  rel="stylesheet"
-/>
+        .cart {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        
+        .cart-item img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: bold;
+        }
+        
+        .cart-item-quantity {
+            color: #666;
+        }
+        
+        .subtotal {
+            margin-top: 20px;
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <span><b>Carrinho de compras</b></span>
-  </header>
-  <main>
-    <div class="page-title">Seu Carrinho</div>
-    <div class="content">
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <th>Produto</th>
-              <th>Preço</th>
-              <th>Quantidade</th>
-              <th>Total</th>
-              <th>-</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="product">
-                  <img src="https://picsum.photos/100/120" alt="" />
-                  <div class="info">
-                    <div class="name">Nome do produto</div>
-                    <div class="category">Categoria</div>
-                  </div>
-                </div>
-              </td>
-              <td>R$ 120</td>
-              <td>
-                <div class="qty">
-                  <button><i class="bx bx-minus"></i></button>
-                  <span>2</span>
-                  <button><i class="bx bx-plus"></i></button>
-                </div>
-              </td>
-              <td>R$ 240</td>
-              <td>
-                <button class="remove"><i class="bx bx-x"></i></button>
-              </td>
-            </tr>
-            <!-- Outras linhas da tabela -->
-          </tbody>
-        </table>
-      </section>
-      <aside>
-        <div class="box">
-          <header>Resumo da compra</header>
-          <div class="info">
-            <div><span>Sub-total</span><span>R$ 418</span></div>
-            <div><span>Frete</span><span>Gratuito</span></div>
-            <div>
-              <button>
-                Adicionar cupom de desconto
-                <i class="bx bx-right-arrow-alt"></i>
-              </button>
+    <header>
+        <h1>Carrinho de Compras</h1>
+    </header>
+    
+    <div class="container">
+        <div class="product">
+            <img src="product1.jpg" alt="Product 1">
+            <div class="product-details">
+                <div class="product-title">Produto 1</div>
+                <div class="product-price">$20.00</div>
+                <button class="add-to-cart">Adicionar ao Carrinho</button>
             </div>
-          </div>
-          <footer>
-            <span>Total</span>
-            <span>R$ 418</span>
-          </footer>
         </div>
-        <button>Finalizar Compra</button>
-      </aside>
+        
+        <div class="product">
+            <img src="product2.jpg" alt="Product 2">
+            <div class="product-details">
+                <div class="product-title">Produto 2</div>
+                <div class="product-price">$15.00</div>
+                <button class="add-to-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+        
+        <div class="product">
+            <img src="product3.jpg" alt="Product 3">
+            <div class="product-details">
+                <div class="product-title">Produto 3</div>
+                <div class="product-price">$25.00</div>
+                <button class="add-to-cart">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div class="cart">
+            <h2>Seu Carrinho</h2>
+            <div class="cart-item">
+                <img src="product1.jpg" alt="Product 1">
+                <div class="cart-item-details">
+                    <div class="cart-item-title">Produto 1</div>
+                    <div class="cart-item-quantity">Quantidade: 1</div>
+                </div>
+                <div class="cart-item-subtotal">$20.00</div>
+                <button class="remove-from-cart">Remover</button>
+            </div>
+            <div class="cart-item">
+                <img src="product2.jpg" alt="Product 2">
+                <div class="cart-item-details">
+                    <div class="cart-item-title">Produto 2</div>
+                    <div class="cart-item-quantity">Quantidade: 1</div>
+                </div>
+                <div class="cart-item-subtotal">$15.00</div>
+                <button class="remove-from-cart">Remover</button>
+            </div>
+            <div class="cart-item">
+                <img src="product3.jpg" alt="Product 3">
+                <div class="cart-item-details">
+                    <div class="cart-item-title">Produto 3</div>
+                    <div class="cart-item-quantity">Quantidade: 1</div>
+                </div>
+                <div class="cart-item-subtotal">$25.00</div>
+                <button class="remove-from-cart">Remover</button>
+
+
+            </div>
+
+            <div class="cart-buttons">
+                <button class="remove-all-from-cart">Limpar Carrinho</button>
+                <button class="checkout-button">Finalizar Compra</button>
+            </div>
+            <div class="subtotal">
+                <strong>Total: $60.00</strong>
+            </div>
+             <div class="cart-buttons">
+                <button class="remove-all-from-cart">Limpar Carrinho</button>
+                <button class="checkout-button">Finalizar Compra</button>
+            </div>
+        </div>
     </div>
-  </main>
+
+    <script>
+  const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        const removeFromCartButtons = document.querySelectorAll(".remove-from-cart");
+        const removeAllFromCartButton = document.querySelector(".remove-all-from-cart");
+        const checkoutButton = document.querySelector(".checkout-button");
+        
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const product = button.closest(".product");
+                const productName = product.querySelector(".product-title").textContent;
+                const productPrice = parseFloat(product.querySelector(".product-price").textContent.slice(1));
+                addToCart(productName, productPrice);
+            });
+        });
+        
+        removeFromCartButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const cartItem = button.closest(".cart-item");
+                const productName = cartItem.querySelector(".cart-item-title").textContent;
+                removeFromCart(productName);
+            });
+        });
+        
+        const cartItems = [];
+        
+        function addToCart(name, price) {
+            const existingItem = cartItems.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cartItems.push({ name, price, quantity: 1 });
+            }
+            updateCart();
+        }
+        
+        function removeFromCart(name) {
+            const index = cartItems.findIndex(item => item.name === name);
+            if (index !== -1) {
+                cartItems.splice(index, 1);
+                updateCart();
+            }
+        }
+        
+        function updateCart() {
+            const cartElement = document.querySelector(".cart");
+            cartElement.innerHTML = `
+                <h2>Seu Carrinho</h2>
+                ${cartItems.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-quantity">Quantidade: ${item.quantity}</div>
+                        </div>
+                        <div class="cart-item-subtotal">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <button class="remove-from-cart">Remover</button>
+                    </div>
+                `).join("")}
+                <div class="subtotal">
+                    <strong>Total: $${calculateTotal().toFixed(2)}</strong>
+                </div>
+            `;
+
+            const newRemoveButtons = document.querySelectorAll(".remove-from-cart");
+            newRemoveButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const cartItem = button.closest(".cart-item");
+                    const productName = cartItem.querySelector(".cart-item-title").textContent;
+                    removeFromCart(productName);
+                });
+            });
+        }
+         removeAllFromCartButton.addEventListener("click", () => {
+            cartItems.length = 0; // Limpar o carrinho
+            updateCart();
+        });
+
+        checkoutButton.addEventListener("click", () => {
+            alert("Compra finalizada! Obrigado por sua compra!");
+            cartItems.length = 0; // Limpar o carrinho após finalizar a compra
+            updateCart();
+        });
+        
+        function calculateTotal() {
+            return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+    </script>
 </body>
 </html>

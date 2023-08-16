@@ -1,3 +1,9 @@
+<?php
+$this->layout("_theme");
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

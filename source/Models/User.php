@@ -66,6 +66,7 @@ class User {
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         $stmt->bindParam(":password",$this->password);
         try {
             $stmt->execute();

@@ -23,11 +23,7 @@ class App
         echo "";
         echo $this ->view -> render ("upload");
     }
-    public function alteration()
-    {
-        echo "";
-        echo $this ->view -> render ("alteration");
-    }
+   
     public function cart()
     {
         echo "";
@@ -38,10 +34,10 @@ class App
         echo "";
         echo $this ->view -> render ("profile");
     }
-    public function alterationcliente()
+    public function alteration()
     {
         echo "";
-        echo $this ->view -> render ("alterationcliente");
+        echo $this ->view -> render ("alteration");
     }
 
 }

@@ -123,9 +123,7 @@ $this->layout("_theme");
     <div class="left-section">
       <div class="profile-photo"></div>
       <div class="name">Nome do Cliente</div>
-      <button class="action-button">
-      <a href="<?= url("/app/alteracaoperfil")?>">Link para Upload</a></br>
-      </button>
+  
     </div>
     <div class="right-section">
       <h2>Informações do Perfil</h2>
@@ -143,7 +141,9 @@ $this->layout("_theme");
       </div>
       <div class="actions">
 
-        <button class="action-button">Alterar Dados Pessoais</button>
+      <button class="action-button">
+      <a href="<?= url("/app/alteracaoperfil")?>">Editar perfil</a></br>
+      </button>
 
         <div>
         <div>

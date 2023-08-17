@@ -48,5 +48,15 @@ class Adm
        
         echo $this ->view -> render ("faq");
     }
+    public function listclient()
+    {
+       
+        echo $this ->view -> render ("listclient");
+    }
+    public function listprodutos()
+    {
+       
+        echo $this ->view -> render ("listprodutos");
+    }
 
 }

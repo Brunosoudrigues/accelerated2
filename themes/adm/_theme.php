@@ -58,7 +58,7 @@
     </ul>
 
     <div class="content" id="content-cadastro-cliente">
-    <a href="<?= url("/admin")?>">
+    <a href="<?= url("/admin/listaclientes")?>">
                Clientes cadastrados
               </a><br>
               <a href="<?= url("/admin/cadastrocliente")?>">
@@ -75,7 +75,7 @@
 
     <div class="content" id="content-cadastro-produto">
         <!-- Formulário de cadastro de produtos -->
-        <a href="<?= url("/admin")?>">
+        <a href="<?= url("/admin/listaprodutos")?>">
                Produtos cadastrados
               </a><br>
               <a href="<?= url("/admin/cadastroproduto")?>">

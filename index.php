@@ -29,10 +29,10 @@ $route->get("/produtos/{categoryName}","Web:products");
 $route->group("/app");
 $route->get("/", "App:home");
 $route->get("/upload", "App:upload");
-$route->get("/alteracao", "App:alteration");
+
 $route->get("/carrinho","App:cart");
 $route->get("/perfil","App:profile");
-$route->get("/alteracaoperfil","App:alterationcliente");
+$route->get("/alteracaoperfil","App:alteration");
 
 $route->group(null);
 
@@ -46,6 +46,8 @@ $route->get("/alteracaocliente", "Adm:alterationcliente");
 $route->get("/cadastroproduto", "Adm:registerproducts");
 $route->get("/alteracaoproduto", "Adm:alterationproducts");
 $route->get("/faq", "Adm:faq");
+$route->get("/listaclientes", "Adm:listclient");
+$route->get("/listaprodutos", "Adm:listprodutos");
 $route->group(null);
 // ate aqui 
 

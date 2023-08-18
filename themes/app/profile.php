@@ -112,6 +112,17 @@ $this->layout("_theme");
       transition: background-color 0.3s ease;
       margin-right: 15px;
     }
+    .action-button1 {
+      background-color: #FFFFFF; /* Azul */
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin-right: 15px;
+    }
 
     .action-button:hover {
       background-color: #2980b9; /* Azul mais claro */
@@ -123,6 +134,11 @@ $this->layout("_theme");
     <div class="left-section">
       <div class="profile-photo"></div>
       <div class="name">Nome do Cliente</div>
+      <div>
+      <button class="action-button1">
+      <a href="<?= url("/app/historico")?>">Historico de compras</a></br>
+      </button>
+</div>
   
     </div>
     <div class="right-section">

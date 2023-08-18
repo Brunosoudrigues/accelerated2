@@ -273,12 +273,12 @@ echo $this -> section("content");
             </li>
 
             <li class="nav-item">
-              <a href="#">Meus pedidos</a>
+              <a href="<?= url("/app")?>">Meus pedidos(app)</a>
             </li>
 
       
             <li class="nav-item">
-              <a href="#">Troca e devoluções</a>
+              <a href="<?= url("/admin")?>">Troca e devoluções(admin)</a>
             </li>
             <li class="nav-item">
               <a href="<?= url("/faq")?>">Faq</a>

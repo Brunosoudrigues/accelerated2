@@ -39,5 +39,10 @@ class App
         echo "";
         echo $this ->view -> render ("alteration");
     }
+    public function listhistorico()
+    {
+        echo "";
+        echo $this ->view -> render ("listhistorico");
+    }
 
 }

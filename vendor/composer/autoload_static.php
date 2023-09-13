@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInit4053af1f7acf900004053846729f61c5
 {
     public static $files = array (
-        '27d6c418579789b91eb4df1f0c2790ac' => __DIR__ . '/../..' . '/source/Boot/Config.php',
-        '849f0dbfd77a98eaff56a4eea9530155' => __DIR__ . '/../..' . '/source/Boot/Helpers.php',
+        '898368f0be3530c516adc6a90218cdaf' => __DIR__ . '/../..' . '/source/Boot/Config.php',
+        '4ef4a26d51b33e5701fbc0d3fe7a7d9b' => __DIR__ . '/../..' . '/source/Boot/Helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -19,6 +19,10 @@ class ComposerStaticInit4053af1f7acf900004053846729f61c5
         'L' => 
         array (
             'League\\Plates\\' => 14,
+        ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
         ),
         'C' => 
         array (
@@ -34,6 +38,10 @@ class ComposerStaticInit4053af1f7acf900004053846729f61c5
         'League\\Plates\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/plates/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'CoffeeCode\\Router\\' => 
         array (

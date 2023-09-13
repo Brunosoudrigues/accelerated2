@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
-        'name' => 'brunosoudrigues/escola-tarde',
+        'reference' => '35004a49cb0ca7fdbc0be632b8ebccec11df7454',
+        'name' => 'brunosoudrigues/accelerated',
         'dev' => true,
     ),
     'versions' => array(
-        'brunosoudrigues/escola-tarde' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+        'brunosoudrigues/accelerated' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '35004a49cb0ca7fdbc0be632b8ebccec11df7454',
             'dev_requirement' => false,
         ),
         'coffeecode/router' => array(
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../coffeecode/router',
             'aliases' => array(),
             'reference' => '29f73e12351a116e9bbb3f695595777a09e18077',
+            'dev_requirement' => false,
+        ),
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v5.5.1',
+            'version' => '5.5.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'reference' => '83b609028194aa042ea33b5af2d41a7427de80e6',
             'dev_requirement' => false,
         ),
         'league/plates' => array(

@@ -44,7 +44,15 @@ class Web
        
         echo $this ->view -> render ("productsinsert");
     }
+    public function apiFaq (array $data)
+    {
+        echo $this->view->render("api-faqs",[]);
+    }
 
+    public function apiLogin (): void
+    {
+        echo $this->view->render("api-login",[]);
+    }
     public function faq()
     {
         $faqs = new Faq();

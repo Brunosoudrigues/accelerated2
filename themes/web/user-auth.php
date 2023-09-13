@@ -1,34 +1,3 @@
-<?php
-
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $email = $_POST["email"];
-  $password = $_POST["password"];
-
-  
-  $userExists = verificarUsuarioNoBanco($email, $password);
-
-  if ($userExists) {
-    echo json_encode(["success" => true]);
-  } else {
-    echo json_encode(["success" => false]);
-  }
-}
-
-function verificarUsuarioNoBanco($email, $password) {
-  
-
-  if ($email === $storedEmail && $password === $storedPassword) {
-    return true;
-  } else {
-    return false;
-  }
-}
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -82,65 +51,83 @@ function verificarUsuarioNoBanco($email, $password) {
             margin-top: 10px;
             font-weight: bold;
         }
-
     </style>
 </head>
 
 <body>
-    <form>
-        <div>
-            <label for="email">E-mail:</label>
-            <input name="email" type="text">
-        </div>
-        <div>
-            <label for="password">Senha:</label>
-            <input name="password" type="password">
-        </div>
-        <div>
-            <button>Fazer login</button>
-        </div>
-        <div class="response">
-        <a href="<?= url("/")?>"> voltar</a></br>
-        <a href="<?= url("/cadastro")?>"> Cadastre-se</a></br>
-        <a href="<?= url("/alteracao")?>"> deseja alterar seus dados? clique aqui!</a>
-        </div>
-    </form>
+<form>
+    <div>
+        <label for="email">E-mail:</label>
+        <input name="email" type="text">
+    </div>
+    <div>
+        <label for="password">Senha:</label>
+        <input name="password" type="password">
+    </div>
+    <div>
+        <button>Fazer login</button>
+    </div>
+    <div class="response">
+        <!-- Aqui é onde a mensagem será exibida -->
+    </div>
+</form>
 
-    <script type="text/javascript" async>
-        const url = `<?= url("api/user/login"); ?>`;
+<script type="text/javascript" async>
+    const url = `<?= $_SERVER['PHP_SELF']; ?>`;
 
-        async function request(url, options) {
-            try {
-                const response = await fetch(url, options);
-                const data = await response.json();
-                return data;
-            } catch (err) {
-                console.error(err);
-                return {
-                    type: "error",
-                    message: err.message
-                };
-            }
-        }
-
-        document.querySelector("form").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const formData = new FormData(document.querySelector("form"));
-            const options = {
-                method: 'POST',
-                body: formData
+    async function request(url, options) {
+        try {
+            const response = await fetch(url, options);
+            const data = await response.json();
+            return data;
+        } catch (err) {
+            console.error(err);
+            return {
+                success: false,
+                message: "Ocorreu um erro durante o processo."
             };
-            const resp = await request(url, options);
-            console.log(resp);
-            const responseElement = document.querySelector(".response");
-            if (resp.type === "error") {
-                responseElement.style.color = "red";
-            } else {
-                responseElement.style.color = "green";
-            }
-            responseElement.textContent = resp.message;
-        });
-    </script>
+        }
+    }
+
+    document.querySelector("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(document.querySelector("form"));
+        const options = {
+            method: 'POST',
+            body: formData
+        };
+        const resp = await request(url, options);
+        console.log(resp);
+        const responseElement = document.querySelector(".response");
+        if (resp.success) {
+            responseElement.style.color = "green";
+        } else {
+            responseElement.style.color = "red";
+        }
+        responseElement.textContent = resp.message;
+    });
+</script>
 </body>
 
 </html>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    $userExists = verificarUsuarioNoBanco($email, $password);
+
+    if ($userExists) {
+        echo json_encode(["success" => true, "message" => "Login bem-sucedido!"]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Email ou senha incorretos."]);
+    }
+}
+
+function verificarUsuarioNoBanco($email, $password) {
+    // Aqui você deve implementar a lógica para verificar o usuário no banco de dados.
+    // Se o usuário existir e a senha estiver correta, retorne true, caso contrário, retorne false.
+}
+?>
+    

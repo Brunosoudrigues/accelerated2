@@ -7,6 +7,8 @@ use PDO;
 use PDOException;
 
 class User {
+
+    private $id;
     private $name;
     private $email;
     private $password;
@@ -23,6 +25,22 @@ class User {
         $this->email = $email;
         $this->password = $password;
         $this->address = $address; // Atribuição nova
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function getName()
@@ -60,8 +78,58 @@ class User {
         return $this->message;
     }
 
+    public function findById (int $id) : User
+    {
+        $query = "SELECT * FROM users WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id",$id);
+        try {
+            $stmt->execute();
+            if($stmt->rowCount()){
+                $user = $stmt->fetch();
+                $this->id = $user->id;
+                $this->name = $user->name;
+                $this->email = $user->email;
+                $this->password = $user->password;
+                return $this;
+            }
+            $this->message = "Usuário não encontrado!";
+            return $this;
+        } catch (PDOException $e) {
+            $this->message = "Erro: {$e->getMessage()}";
+            return $this;
+        }
+    }
+
+    public function findByEmail (string $email) : bool
+    {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":email",$email);
+        try {
+            $stmt->execute();
+            if($stmt->rowCount()){
+                $user = $stmt->fetch();
+                $this->id = $user->id;
+                $this->name = $user->name;
+                $this->email = $user->email;
+                return true;
+            }
+            $this->message = "Usuário não encontrado!";
+            return false;
+        } catch (PDOException $e) {
+            $this->message = "Erro: {$e->getMessage()}";
+            return false;
+        }
+    }
+
     public function insert () : bool
     {
+        if($this->findByEmail($this->email)){
+            $this->message = "E-mail já cadastrado!";
+            return false;
+        }
+
         $query = "INSERT INTO users VALUES (NULL,:name,:email,:password)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
@@ -71,7 +139,8 @@ class User {
         try {
             $stmt->execute();
             if($stmt->rowCount()){
-                $this->message = "Usuário inserido com sucesso!";
+                $this->id = Connect::getInstance()->lastInsertId();
+                $this->message = "Usuário cadastrado com sucesso!";
                 return true;
             }
             $this->message = "Erro ao inserir usuário, verifique os dados!";
@@ -82,44 +151,34 @@ class User {
         }
     }
 
-
     public function auth (string $email, string $password) : bool
     {
-        // $query = "SELECT * 
-        //           FROM users 
-        //           WHERE email LIKE :email AND password LIKE :password";
+        $query = "SELECT * 
+                  FROM users 
+                  WHERE email LIKE :email";
 
-        // $stmt = Connect::getInstance()->prepare($query);
-        // $stmt->bindParam(":email", $email);
-        // $stmt->bindParam(":password", $password);
-        // $stmt->execute();
-        // if($stmt->rowCount() == 0) {
-        //     return false;
-        // }
-        // return true;
-
-        $query ="SELECT * FROM users WHERE email LIKE :email";
-        $stmt=Connect::getInstance()->prepare($query);
-        $stmt->bindParam(":email",$email);
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":email", $email);
         $stmt->execute();
-        if ($stmt->rowCount()==0){
-            $this->message= "Usuário não cadastrado!";
+
+        if($stmt->rowCount() == 0) {
+            $this->message = "Usuário não encontrado!";
             return false;
         }
+
         $user = $stmt->fetch();
-        if (!password_verify($password, $user->password)){
-            $this->message="Senha incorreta!";
+
+        if(!password_verify($password, $user->password)) {
+            $this->message = "Senha incorreta!";
             return false;
-
         }
-        $this->id = $user->id;
-        $this->name= $user->name;
-        $this->message= "Usuario autenticado com sucesso!";
-        return true;
 
-        
+        $this->id = $user->id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->message = "Usuário autenticado com sucesso!";
+        return true;
 
     }
 
-
-}   
+}

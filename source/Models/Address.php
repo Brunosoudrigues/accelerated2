@@ -50,7 +50,11 @@ class Address
 
     public function selectByIdUser(int $userId)
     {
-        $sql = "SELECT * FROM addresses WHERE user_id = :user_id";
+        $sql = "SELECT addresses.*, users.name as user_name 
+                FROM addresses 
+                JOIN users ON addresses.user_id = users.id 
+                WHERE addresses.user_id = :user_id";
+
         $stmt = Connect::getInstance()->prepare($sql);
         $stmt->bindParam(":user_id", $userId, \PDO::PARAM_INT);
 

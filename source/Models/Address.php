@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Source\Models;
 
 use Source\Core\Connect;
@@ -47,18 +48,29 @@ class Address
         $this->complement = $complement;
     }
 
-    public function selectByIdUser (int $idUser) : array
+    public function selectByIdUser(int $userId)
     {
-        $sql = "SELECT * FROM addresses WHERE user_id = :idUser";
+        $sql = "SELECT * FROM addresses WHERE user_id = :user_id";
         $stmt = Connect::getInstance()->prepare($sql);
-        $stmt->bindParam(":idUser",$idUser);
+        $stmt->bindParam(":user_id", $userId, \PDO::PARAM_INT);
+
         try {
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (\PDOException $e) {
-            return $e->getMessage();
+            return false; // Retornar falso em caso de erro
         }
-
     }
 
+    public function getAllAddresses()
+    {
+        // Implemente a lógica para buscar todos os endereços
+        // Supondo que você está usando algum banco de dados e quer fazer uma consulta SQL
+        // A lógica abaixo é apenas um exemplo e pode variar dependendo do seu banco de dados
+
+        $query = "SELECT * FROM addresses";
+        $stmt = Connect::getInstance()->query($query);
+
+        return $stmt->fetchAll();
+    }
 }

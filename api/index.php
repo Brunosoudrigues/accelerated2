@@ -15,6 +15,12 @@ $route->post("/user","Users:create");
 $route->get("/user/adresses","Users:listAdresses");
 
 $route->get("/faqs","Faqs:listFaqs");
+$route->get("/products","Products:listProducts");
+
+$route->get("/addresses", "Addresses:listAddresses");
+$route->get("/addresses/idUser/{user_id}", "Addresses:listByIdUser");
+
+$route->get("/products/category/{category_id}","Products:listByCategory");
 
 $route->dispatch();
 

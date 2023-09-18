@@ -24,6 +24,16 @@ class Product
         return $stmt->fetchAll();
 
     }
+
+    public function selectByCategoryId(int $categoryId)
+    {
+        $query = "SELECT products.* 
+                  FROM products 
+                  JOIN categories ON categories.id = products.category_id 
+                  WHERE products.category_id = {$categoryId}";
+        $stmt = Connect::getInstance()->query($query);
+        return $stmt->fetchAll();
+    }
    
     
 

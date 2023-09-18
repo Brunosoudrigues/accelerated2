@@ -1,86 +1,108 @@
-<?php
-$this->layout("_theme");
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login com API</title>
     <style>
-        /* Estilo para o cabeçalho (h1) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Fundo cinza claro */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #3498db; /* Azul */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
         h1 {
             font-size: 24px;
-            color: #333;
-            text-align: center;
+            color: white;
+            margin-bottom: 20px;
         }
 
-        /* Estilo para o formulário */
-        #formLogin {
-            margin: 0 auto;
-            width: 300px;
-            text-align: center;
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
         }
 
-        /* Estilo para as divs dentro do formulário */
-        div {
-            margin-bottom: 10px;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
         }
 
-        /* Estilo para os inputs de texto */
-        input[type="text"] {
-            width: 100%;
-            padding: 5px;
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
 
-        /* Estilo para o botão de login */
         button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
+            width: calc(100% - 22px);
+            padding: 15px;
+            background-color: #2980b9;
+            color: white;
             border: none;
-            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
 
-        /* Estilo para o script */
-        script {
-            display: none; /* Escondendo o script na renderização da página */
+        button[type="submit"]:hover {
+            background-color: #2574a9;
         }
     </style>
 </head>
 <body>
-    <h1>Login com API</h1>
-    <div>
+    <div class="login-container">
+        <h1>Login com API</h1>
+
         <form id="formLogin">
-            <div>E-mail: <input type="text" id="email" name="email" value="fabiosantos@ifsul.edu.br"></div>
-            <div>Password: <input type="text" id="password" name="password" value="12345678"></div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="text" id="email" name="email" placeholder="Digite seu e-mail">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha">
+            </div>
+
             <button type="submit">Login</button>
         </form>
     </div>
-
     <script type="module" async>
-        import { request, requestDebugError } from "<?php echo url("/assets/_shared/functions.js"); ?>";
-        const formLogin = document.querySelector("#formLogin");
-        formLogin.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const urlLogin = "<?= url("api/user/login"); ?>";
-            const options = {
-                method : "get",
-                headers : {
-                    email : document.querySelector("#email").value,
-                    password : document.querySelector("#password").value
-                }
-            };
-            fetch(urlLogin,options).then(response => {
-                response.json().then(user => {
-                    console.log(user);
-                    localStorage.setItem("userLogin",JSON.stringify(user));
-                });
+    import {request, requestDebugError} from "<?php echo url("/assets/_shared/functions.js"); ?>";
+    const formLogin = document.querySelector("#formLogin");
+    formLogin.addEventListener("submit", (event) => {
+        event.preventDefault();
+        console.log("oi");
+        const urlLogin = "<?= url("api/user/login"); ?>";
+        console.log(urlLogin);
+        const options = {
+            method : "get",
+            headers : {
+                email : document.querySelector("#email").value,
+                password : document.querySelector("#password").value
+            }
+        };
+        fetch(urlLogin,options).then(response => {
+            response.json().then(user => {
+                console.log(user);
+                //console.log(JSON.stringify(user));
+                localStorage.setItem("userLogin",JSON.stringify(user));
             });
         });
-    </script>
-
-
+    });
+</script>
 </body>
 </html>

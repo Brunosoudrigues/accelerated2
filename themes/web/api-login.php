@@ -77,7 +77,11 @@
                 <input type="password" id="password" name="password" placeholder="Digite sua senha">
             </div>
 
-            <button type="submit">Login</button>
+            <button type="submit" >Login</button><br>
+
+             <li class="nav-item">
+              <a href="<?= url("/api-address")?>">lista de endereços</a>
+            </li>
         </form>
     </div>
     <script type="module" async>

@@ -49,6 +49,15 @@ class Web
         echo $this->view->render("api-faqs",[]);
     }
 
+
+    public function apiAddress (array $data)
+    {
+        echo $this->view->render ("api-address");
+    }
+    public function apilistproducts (array $data)
+    {
+        echo $this->view->render ("api-listproducts");
+    }
     public function apiLogin (): void
     {
         echo $this->view->render("api-login",[]);

@@ -2,7 +2,7 @@
 
 namespace Source\App\Api;
 
-use Source\Models\Product; // Certifique-se de importar a classe Product, se necessário
+use Source\Models\Product;
 
 class Products extends Api
 {
@@ -11,24 +11,35 @@ class Products extends Api
         header('Content-Type: application/json; charset=UTF-8');
     }
 
-
-    public function listByCategory (array $data) : void
+    public function listByCategory(array $data): void
     {
-        $products = (new Product())->selectByCategoryId($data["category_id"]);
-        $this->back($products,200);
-    }
- 
+        if (!isset($data['category_id'])) {
+            echo json_encode(["message" => "ID da categoria não fornecido."]);
+            return;
+        }
 
-    public function listProducts(array $data): void
-    {
-        $products = (new Product())->selectAll();
+        $categoryId = (int) $data['category_id'];
+        $productModel = new Product();
+        $products = $productModel->selectByCategoryId($categoryId);
+
+        if (empty($products)) {
+            echo json_encode(["message" => "Nenhum produto encontrado para a categoria com ID {$categoryId}."]);
+            return;
+        }
+
         $this->back($products, 200);
     }
 
-    public function selectAll()
+    public function listProducts(array $data): void
     {
-        // Substitua 'Product' pelo nome da sua classe de produtos, se for diferente
-        $products = (new Product())->selectAll(); 
+        $productModel = new Product();
+        $products = $productModel->selectAll();
+
+        if (empty($products)) {
+            echo json_encode(["message" => "Nenhum produto encontrado."]);
+            return;
+        }
+
         $this->back($products, 200);
     }
 }

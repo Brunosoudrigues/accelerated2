@@ -25,6 +25,8 @@ $route->get("/produtos","Web:products");
 $route->get("/cadastroprodutos","Web:productsinsert");
 $route->get("/api-faq","Web:apiFaq");
 $route->get("/api-login","Web:apiLogin");
+$route->get("/api-address","Web:apiAddress");
+$route->get("/api-listproducts","Web:apilistproducts");
 
 $route->get("/produtos/{categoryName}","Web:products");
 

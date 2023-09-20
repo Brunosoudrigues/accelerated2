@@ -66,6 +66,8 @@ class Address
         }
     }
 
+
+    
     public function getAllAddresses()
     {
         // Implemente a lógica para buscar todos os endereços

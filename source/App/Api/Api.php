@@ -13,6 +13,10 @@ class Api
     protected $headers;
     protected $token;
 
+
+
+
+
     public function __construct()
     {
         header('Content-Type: application/json; charset=UTF-8');

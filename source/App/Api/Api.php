@@ -13,10 +13,6 @@ class Api
     protected $headers;
     protected $token;
 
-
-
-
-
     public function __construct()
     {
         header('Content-Type: application/json; charset=UTF-8');
@@ -65,8 +61,6 @@ class Api
 
                 return;
             }
-
-            //var_dump($token->token->data->name);
 
             $this->user = (new User())->findById($token->token->data->idUser);
             $this->user->setPassword(NULL);

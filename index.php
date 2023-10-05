@@ -23,9 +23,13 @@ $route->get("/carrinho","Web:cart");
 $route->get("/ops/{errcode}", "Web:error");
 $route->get("/produtos","Web:products");
 $route->get("/cadastroprodutos","Web:productsinsert");
+$route->get("/api-address","Web:api-address");
 $route->get("/api-faq","Web:apiFaq");
 $route->get("/api-login","Web:apiLogin");
-$route->get("/api-address","Web:apiAddress");
+
+
+
+
 $route->get("/api-listproducts","Web:apilistproducts");
 
 $route->get("/produtos/{categoryName}","Web:products");

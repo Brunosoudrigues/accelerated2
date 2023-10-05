@@ -12,6 +12,7 @@ class User {
     private $name;
     private $email;
     private $password;
+    private $photo;
     private $address; // Atributo novo
     private $message;
 
@@ -35,9 +36,7 @@ class User {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
+
     public function setId($id): void
     {
         $this->id = $id;
@@ -63,12 +62,12 @@ class User {
         $this->email = $email;
     }
 
-    public function getPassword(): mixed
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(mixed $password): void
+    public function setPassword( $password): void
     {
         $this->password = $password;
     }
@@ -76,6 +75,16 @@ class User {
     public function getMessage(): string
     {
         return $this->message;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): void
+    {
+        $this->photo = $photo;
     }
 
     public function findById (int $id) : User
@@ -90,6 +99,7 @@ class User {
                 $this->id = $user->id;
                 $this->name = $user->name;
                 $this->email = $user->email;
+                $this->photo = $user->photo;
                 $this->password = $user->password;
                 return $this;
             }
@@ -176,9 +186,20 @@ class User {
         $this->id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->photo = $user->photo;
         $this->message = "Usuário autenticado com sucesso!";
         return true;
 
+    }
+
+    public function uploadPhoto(string $photo) : bool
+    {
+        $query = "UPDATE users SET photo = :photo WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":photo",$photo);
+        $stmt->bindParam(":id",$this->id);
+        $stmt->execute();
+        return true;
     }
 
 }

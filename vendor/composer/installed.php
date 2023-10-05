@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '35004a49cb0ca7fdbc0be632b8ebccec11df7454',
+        'reference' => '469f7b7bc92a9bf4ce27fbcf12c82eca760700db',
         'name' => 'brunosoudrigues/accelerated',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '35004a49cb0ca7fdbc0be632b8ebccec11df7454',
+            'reference' => '469f7b7bc92a9bf4ce27fbcf12c82eca760700db',
             'dev_requirement' => false,
         ),
         'coffeecode/router' => array(
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../coffeecode/router',
             'aliases' => array(),
             'reference' => '29f73e12351a116e9bbb3f695595777a09e18077',
+            'dev_requirement' => false,
+        ),
+        'coffeecode/uploader' => array(
+            'pretty_version' => '2.0.4',
+            'version' => '2.0.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../coffeecode/uploader',
+            'aliases' => array(),
+            'reference' => '4601ff1665a4591087c524239c1e545ba4834453',
             'dev_requirement' => false,
         ),
         'firebase/php-jwt' => array(

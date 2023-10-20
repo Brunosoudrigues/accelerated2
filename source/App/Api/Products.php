@@ -42,4 +42,9 @@ class Products extends Api
 
         $this->back($products, 200);
     }
+    public function getProduct(array $data): void
+    {
+        $product = (new Product())->selectById($data["product_id"]);
+        $this->back($product,200);
+    }
 }

@@ -3,6 +3,7 @@
 namespace Source\App;
 
 use League\Plates\Engine;
+use Source\Models\Category;
 
 class Adm
 {
@@ -18,11 +19,16 @@ class Adm
         echo "";
         echo $this ->view -> render ("home");
     }
-    public function products()
+    
+    public function products ()
     {
-       
-        echo $this ->view -> render ("products");
-    }
+        $categories = new Category();
+        echo $this->view->render(
+            "products", [
+                "categories" => $categories->selectAll()
+            ]
+        );}
+
     public function registercliente()
     {
        

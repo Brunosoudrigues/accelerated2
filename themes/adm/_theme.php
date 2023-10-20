@@ -75,6 +75,9 @@
 
     <div class="content" id="content-cadastro-produto">
         <!-- Formulário de cadastro de produtos -->
+        <a href="<?= url("/admin/produtos")?>">
+           Lista de produtos
+              </a><br>
         <a href="<?= url("/admin/listaprodutos")?>">
                Produtos cadastrados
               </a><br>

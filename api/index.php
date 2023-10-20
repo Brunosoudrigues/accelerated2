@@ -17,6 +17,7 @@ $route->post("/user/photo","Users:updatePhoto");
 
 $route->get("/faqs","Faqs:listFaqs");
 $route->get("/products","Products:listProducts");
+$route->get("/products/{product_id}","Products:getProduct");
 
 
 

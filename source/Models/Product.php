@@ -34,7 +34,12 @@ class Product
         $stmt = Connect::getInstance()->query($query);
         return $stmt->fetchAll();
     }
-   
+    public function selectById (int $id)
+    {
+        $query = "SELECT * FROM products WHERE id = {$id}";
+        $stmt = Connect::getInstance()->query($query);
+        return $stmt->fetchAll();
+    }
     
 
 

@@ -455,7 +455,7 @@ const imagePreview = document.querySelector("#preview-image");
                     const form = document.querySelector("#edit-form");
                     form.querySelector("#id").value = product[0].id;
                     form.querySelector("#name").value = product[0].nameproducts;
-                    form.querySelector("#category_id").value = product[0].idCategory;
+                    form.querySelector("#category_id").value = product[0].category_id;
                     form.querySelector("#price").value = product[0].price;
                     
                 });

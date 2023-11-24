@@ -88,4 +88,10 @@ class Web
 
         }
 
+        public function apiinsert()
+    {
+       
+        echo $this ->view -> render ("api-insert");
+    }
+
     }

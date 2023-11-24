@@ -64,5 +64,5 @@ class Adm
        
         echo $this ->view -> render ("listprodutos");
     }
-
+ 
 }

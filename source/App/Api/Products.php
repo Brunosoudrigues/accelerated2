@@ -47,4 +47,24 @@ class Products extends Api
         $product = (new Product())->selectById($data["product_id"]);
         $this->back($product,200);
     }
+    public function updateProduct(array $data): void
+{
+    // int $id = null, string $name = null, int $categoryId = null, float $price = null, string $abstract = null
+    $product = (new Product(
+        $data["id"],
+        $data["name"],
+        $data["category_id"],
+        (float) $data["price"],
+        NULL
+    ))->update();
+
+    $response = [
+        "type" => "success",
+        "message" => "Produto atualizado com sucesso!"
+    ];
+
+    $this->back($response, 200);
+}
+
+    
 }

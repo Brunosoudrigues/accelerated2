@@ -18,8 +18,7 @@ $route->post("/user/photo","Users:updatePhoto");
 $route->get("/faqs","Faqs:listFaqs");
 $route->get("/products","Products:listProducts");
 $route->get("/products/{product_id}","Products:getProduct");
-
-
+$route->post("/products","Products:updateProduct");
 
 $route->get("/products/category/{category_id}","Products:listByCategory");
 

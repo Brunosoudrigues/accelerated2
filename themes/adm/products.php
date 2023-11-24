@@ -363,14 +363,10 @@ table td img {
             
             <label for="price">Preço:</label>
             <input type="text" id="price" name="price">
-     
+
             <label for="image">Imagem:</label>
-<input type="file" id="image" name="image">
-<div id="image-preview">
-    <img id="preview-image" src="" alt="Imagem do Produto">
-</div>
-
-
+            <input type="text" id="image" name="image">
+     
            
             <button type="submit">Salvar</button>
         </form>
@@ -385,133 +381,141 @@ table td img {
 
 
 <script type="text/javascript">
-
-
-
-
-const tableProducts = document.querySelector("table");
-    // Seletor para a modal
+    const tableProducts = document.querySelector("table");
     const modal = document.querySelector("#edit-modal");
-    // Seletor para o botão de fechar a modal
     const closeModalButton = document.querySelector(".close");
     const imageInput = document.querySelector("#image");
-const imagePreview = document.querySelector("#preview-image");
+    const imagePreview = document.querySelector("#preview-image");
 
-
-
-
-    // Função para abrir a modal com dados do produto (vai receber por parâmetro o id do produto)
     function openModal() {
         modal.style.display = "block";
     }
 
-
-
-
-    // Fechar a modal ao clicar no botão de fechar
-    closeModalButton.onclick = function() {
+    closeModalButton.onclick = function () {
         modal.style.display = "none";
     };
 
-
-
-
-    // Fechar a modal quando o usuário clicar fora dela
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
         }
     };
 
-
-
-
-    // Função para carregar os dados do produto na modal
-
-
-
-
     tableProducts.addEventListener("click", (event) => {
-
-
-
-
-        if(event.target.tagName === "TD"){
-            console.log(event.target.parentNode);
-
-
-
-
-            console.log(`Mostrar: ${event.target.parentNode.getAttribute("data-id")}`);
-            // Requisição para getCourse
+        if (event.target.tagName === "TD") {
             const urlGetProduct = "<?= url("api/products/"); ?>" + event.target.parentNode.getAttribute("data-id");
             const optionsGetProduct = {
-                method : "get"
+                method: "get",
             };
-            fetch(urlGetProduct, optionsGetProduct).then((response) => {
-                response.json().then((product) => {
-                    // carregar os dados no formulário
-                    // console.log(book[0]);
+
+            fetch(urlGetProduct, optionsGetProduct)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((product) => {
                     const form = document.querySelector("#edit-form");
                     form.querySelector("#id").value = product[0].id;
-                    form.querySelector("#name").value = product[0].nameproducts;
+                    form.querySelector("#name").value = product[0].name;
                     form.querySelector("#category_id").value = product[0].category_id;
                     form.querySelector("#price").value = product[0].price;
-                    
+                    form.querySelector("#image").value = product[0].image;
+                    openModal();
+                })
+                .catch((error) => {
+                    console.error('Fetch error:', error);
                 });
-            });
-            openModal();
         }
 
-
-
-
-        if(event.target.tagName === "BUTTON"){
+        if (event.target.tagName === "BUTTON") {
             console.log(`Apagar: ${event.target.parentNode.parentNode.getAttribute("data-id")}`);
-            // Requisisão para deleteCourse
-            //event.target.parentNode.parentNode.remove();
+            // Handle deleteCourse request here
         }
     });
 
     imageInput.addEventListener("change", () => {
-    const file = imageInput.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imagePreview.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    } else {
-        imagePreview.src = ""; // Limpar a imagem se nenhum arquivo for selecionado
-    }
-});
-
-
-
-
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = "";
+        }
+    });
 
     const selectCategory = document.querySelector("#category");
-    selectCategory.addEventListener("change",  async () => {
-        console.log(selectCategory.value);
+    selectCategory.addEventListener("change", async () => {
         const url = "<?= url("api/products/category/"); ?>" + selectCategory.value;
         const response = await fetch(url, {
-            method : "get"
+            method: "get",
         });
+
+        if (!response.ok) {
+            console.error(`HTTP error! Status: ${response.status}`);
+            return;
+        }
+
         const products = await response.json();
-        console.log(products);
         const listProducts = document.querySelector("#productList");
         listProducts.innerHTML = "";
+
         products.forEach((product) => {
-            console.log(product.name);
             const tr = document.createElement("tr");
-            tr.setAttribute("data-id",product.id);
-            tr.innerHTML = `<td>${product.id}</td><td>${product.nameproducts}</td><td>R$ ${product.price}</td><td><img src="<?= url(''); ?>${product.image}" alt="${product.name}"></td><td><button>X</button></td>`;
+            tr.setAttribute("data-id", product.id);
+            tr.innerHTML = `<td>${product.id}</td><td>${product.name}</td><td>R$ ${product.price}</td><td><img src="<?= url(''); ?>${product.image}" alt="${product.name}"></td><td><button>X</button></td>`;
             listProducts.appendChild(tr);
         });
-    });
+
+        const editForm = document.querySelector("#edit-form");
+        
+        editForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const urlUpdate = "<?= url("api/products"); ?>";
+            const optionsUpdate = {
+                method: "post",
+                body: new FormData(editForm),
+            };
+
+            console.log();
+            fetch(urlUpdate, optionsUpdate).then((response) => {
+                response.text().then((product) => {
+                    console.log(product);
+                    const tr = document.querySelector(`tr[data-id="${product.id}"]`);
+tr.innerHTML = `<td>${product.id}</td><td>${product.name}</td><td>R$ ${product.price}</td><td><button>X</button></td>`;
+
+                });
+            });
+
+           /* 
+
+            fetch(urlUpdate, optionsUpdate)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((product) => {
+                    const tr = document.querySelector(`tr[data-id="${product.id}"]`);
+                    tr.innerHTML = `<td>${product.id}</td><td>${product.nameproducts}</td><td>R$ ${product.price}</td><td><button>X</button></td>`;
+
+                    if (selectCategory.value != product.category_id) {
+                        tr.remove();
+                    }
+
+                    modal.style.display = "none";
+                })
+                .catch((error) => {
+                    console.error('Fetch error:', error);
+                });
+
+                */
+        });
+
+    }); 
 </script>
-
-
-
-
-

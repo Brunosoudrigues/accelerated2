@@ -140,7 +140,8 @@ class User {
             return false;
         }
 
-        $query = "INSERT INTO users VALUES (NULL,:name,:email,:password)";
+        $query = "INSERT INTO users (id, name, email, password) VALUES (NULL,:name,:email,:password)";
+        //var_dump($this);
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
